@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { signIn } from "next-auth/react";
-
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 /* import axios from "axios";
  */ const Home = () => {

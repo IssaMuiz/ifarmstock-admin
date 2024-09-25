@@ -1,25 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { signIn } from "next-auth/react";
-
 import { useState } from "react";
-/* import axios from "axios";
- */ const Home = () => {
-  const [loading, setLoading] = useState(false);
+
+const Home = () => {
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
   });
-  /*   const router = useRouter();
-   */
+
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     return setUser((prevInfo) => ({ ...prevInfo, [name]: value }));
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     setLoading(true);
     console.log(user);
@@ -35,48 +33,15 @@ import { useState } from "react";
         setError("Invalid email id");
         return;
       }
-
-      /* const res = await axios.post("/api/register", user);
-      console.log(res.data); */
-      fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Response:", data);
-        });
-      /* if (res.status == 200 || res.status == 201) {
-        console.log("user added successfuly");
-        setError("");
-        router.push("/");
-      } */
-    } catch (error: any) {
-      if (error.response) {
-        console.log("Response error", error.res.data);
-      } else if (error.request) {
-        console.log("Request error", error.request);
-      }
-      setError("Error registering user");
+    } catch (error) {
+      console.log(error);
+      setError("");
     } finally {
       setLoading(false);
-      setUser({
-        name: "",
-        email: "",
-        password: "",
-      });
     }
   };
   return (
-    <main className="flex flex-col md:mx-80 sm:mx-10 items-center mt-40">
+    <main className="flex flex-col md:mx-80 sm:mx-10 items-center mt-60">
       <h1 className="text-3xl font-bold">Welcome to the iFarmStock Admin</h1>
       <p className="text-lg font-semibold">
         Only Admin can have access to this page
@@ -107,22 +72,9 @@ import { useState } from "react";
           type="password"
           placeholder="Your Password"
         />
-        <div>
-          {error && <p> {error}</p>}
-
-          <button
-            type="submit"
-            className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700"
-          >
-            {loading ? "Processing..." : "Register"}
-          </button>
-        </div>
+        <button type="submit">Register</button>
       </form>
-      <div className="flex justify-center items-center w-full gap-3 py-3">
-        <div className="border border-gray-800 py-2 w-full px-6"></div>
-        <div className="">Or</div>
-        <div className="border border-gray-800 py-2 w-full px-6"></div>
-      </div>
+
       <button
         onClick={() => signIn("google")}
         className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700"

@@ -1,5 +1,3 @@
-import { DefaultSession, DefaultUser } from "next-auth";
-
 declare namespace NodeJS {
   interface ProcessEnv {
     CLIENT_ID: string;
@@ -10,12 +8,11 @@ declare namespace NodeJS {
 
 declare module "next-auth" {
   interface Session {
-    user?: {
+    user: {
       id: string;
-    } & DefaultSession["user"];
-  }
-
-  interface User extends DefaultUser {
-    id: string;
+      name?: string;
+      email?: string;
+      image?: string;
+    };
   }
 }

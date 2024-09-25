@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { signIn } from "next-auth/react";
-
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-/* import axios from "axios";
- */ const Home = () => {
-  const [loading, setLoading] = useState(false);
+import axios from "axios";
+
+const Home = () => {
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
   });
-  /*   const router = useRouter();
-   */
+  const router = useRouter();
+
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     return setUser((prevInfo) => ({ ...prevInfo, [name]: value }));
@@ -36,36 +37,16 @@ import { useState } from "react";
         return;
       }
 
-      /* const res = await axios.post("/api/register", user);
-      console.log(res.data); */
-      fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Response:", data);
-        });
-      /* if (res.status == 200 || res.status == 201) {
+      const res = await axios.post("/api/register", user);
+      console.log(res.data);
+      if (res.status == 200 || res.status == 201) {
         console.log("user added successfuly");
         setError("");
         router.push("/");
-      } */
-    } catch (error: any) {
-      if (error.response) {
-        console.log("Response error", error.res.data);
-      } else if (error.request) {
-        console.log("Request error", error.request);
       }
-      setError("Error registering user");
+    } catch (error) {
+      console.log(error);
+      setError("");
     } finally {
       setLoading(false);
       setUser({

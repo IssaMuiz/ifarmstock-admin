@@ -1,8 +1,8 @@
 import NextAuth from "next-auth/next";
 import Google from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from "@/lib/models/auth";
-import { connect } from "@/lib/config/mongodb";
+import User from "../../../../lib/models/auth";
+import { connect } from "../../../../lib/config/mongodb";
 import bcryptjs from "bcryptjs";
 
 const handler = NextAuth({

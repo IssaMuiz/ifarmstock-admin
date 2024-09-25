@@ -27,11 +27,11 @@ const handler = NextAuth({
             return null;
           }
 
-          const passwordMatch = await bcryptjs.compare(password, user.password);
+          /* const passwordMatch = await bcryptjs.compare(password, user.password);
           if (!passwordMatch) {
             return null;
           }
-          return user;
+          return user; */
         } catch (error) {
           console.log("Error", error);
         }
