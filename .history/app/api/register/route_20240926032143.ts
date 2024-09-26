@@ -28,12 +28,10 @@ export async function POST(req: NextRequest) {
       password: hashedPassword,
     });
 
-    await savedUser.save().then(() => {
-      return NextResponse.json({
-        message: "User created Succefully",
-        success: true,
-        savedUser,
-      });
+    return NextResponse.json({
+      message: "User created Succefully",
+      success: true,
+      savedUser,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

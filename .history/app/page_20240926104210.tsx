@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 
 const Login = () => {
@@ -16,46 +15,6 @@ const Login = () => {
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     return setUser((prevInfo) => ({ ...prevInfo, [name]: value }));
-  };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      if (!user.email || !user.password) {
-        setError("Please fill the required fields");
-        return;
-      }
-
-      const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
-      if (!emailRegex.test(user.email)) {
-        setError("Invalid email id");
-        return;
-      }
-
-      const res = await signIn("credentials", {
-        email: user.email,
-        password: user.password,
-        redirect: false,
-      });
-
-      if (res?.error) {
-        console.log(res);
-        setError("error");
-      }
-
-      setError("");
-      router.push("/dashboard");
-    } catch (error) {
-      console.log(error);
-      setError("");
-    } finally {
-      setLoading(false);
-      setUser({
-        email: "",
-        password: "",
-      });
-    }
   };
 
   return (

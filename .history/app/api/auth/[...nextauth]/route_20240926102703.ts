@@ -44,30 +44,6 @@ const handler = NextAuth({
   },
 
   callbacks: {
-    async signIn({ user, account }: { user: any; account: any }) {
-      if (account.provider === "google") {
-        try {
-          const { name, email } = user;
-          await connect();
-          const userExist = await User.findOne({ email });
-          if (userExist) {
-            return user;
-          }
-
-          const newUser = new User({
-            name: name,
-            email: email,
-          });
-
-          const res = await newUser.save();
-          if (res.status === 200 || res.status === 201) {
-            return user;
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    },
     async jwt({ token, user }) {
       if (user) {
         token.email = user.email;

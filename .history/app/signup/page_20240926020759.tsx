@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-const Login = () => {
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
+const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [user, setUser] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -21,8 +24,10 @@ const Login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
+    console.log(user);
+
     try {
-      if (!user.email || !user.password) {
+      if (!user.name || !user.email || !user.password) {
         setError("Please fill the required fields");
         return;
       }
@@ -33,31 +38,30 @@ const Login = () => {
         return;
       }
 
-      const res = await signIn("credentials", {
-        email: user.email,
-        password: user.password,
-        redirect: false,
-      });
+      const res = await axios.post("/api/register", user);
+      console.log(res.data);
 
-      if (res?.error) {
-        console.log(res);
-        setError("error");
+      if (res.status == 200 || res.status == 201) {
+        console.log("user added successfuly");
+        setError("");
+        router.push("/");
       }
-
-      setError("");
-      router.push("/dashboard");
-    } catch (error) {
-      console.log(error);
-      setError("");
+    } catch (error: any) {
+      if (error.response) {
+        console.log("Response error", error.res.data);
+      } else if (error.request) {
+        console.log("Request error", error.request);
+      }
+      setError("Error registering user");
     } finally {
       setLoading(false);
       setUser({
+        name: "",
         email: "",
         password: "",
       });
     }
   };
-
   return (
     <main className="flex flex-col md:mx-80 sm:mx-10 items-center mt-40">
       <h1 className="text-3xl font-bold">Welcome to the iFarmStock Admin</h1>
@@ -66,6 +70,14 @@ const Login = () => {
       </p>
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit} action="">
+        <input
+          className="border p-3 w-full"
+          name="name"
+          value={user.name}
+          onChange={handleInputChange}
+          type="text"
+          placeholder="Your full name"
+        />
         <input
           className="border p-3 w-full"
           onChange={handleInputChange}
@@ -79,7 +91,7 @@ const Login = () => {
           onChange={handleInputChange}
           name="password"
           value={user.password}
-          type={"password"}
+          type="password"
           placeholder="Your Password"
         />
         <div>
@@ -108,4 +120,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

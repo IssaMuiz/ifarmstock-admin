@@ -98,10 +98,7 @@ const Login = () => {
         <div className="">Or</div>
         <div className="border border-gray-800 py-2 w-full px-6"></div>
       </div>
-      <button
-        onClick={() => signIn("google")}
-        className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700"
-      >
+      <button className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700">
         Sign in with Google
       </button>
     </main>

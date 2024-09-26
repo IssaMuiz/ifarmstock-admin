@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -32,20 +31,6 @@ const Login = () => {
         setError("Invalid email id");
         return;
       }
-
-      const res = await signIn("credentials", {
-        email: user.email,
-        password: user.password,
-        redirect: false,
-      });
-
-      if (res?.error) {
-        console.log(res);
-        setError("error");
-      }
-
-      setError("");
-      router.push("/dashboard");
     } catch (error) {
       console.log(error);
       setError("");
@@ -98,10 +83,7 @@ const Login = () => {
         <div className="">Or</div>
         <div className="border border-gray-800 py-2 w-full px-6"></div>
       </div>
-      <button
-        onClick={() => signIn("google")}
-        className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700"
-      >
+      <button className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700">
         Sign in with Google
       </button>
     </main>
