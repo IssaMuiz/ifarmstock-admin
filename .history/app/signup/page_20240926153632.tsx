@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-const Login = () => {
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
+const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [user, setUser] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -22,8 +24,10 @@ const Login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
+    console.log(user);
+
     try {
-      if (!user.email || !user.password) {
+      if (!user.name || !user.email || !user.password) {
         setError("Please fill the required fields");
         return;
       }
@@ -34,31 +38,27 @@ const Login = () => {
         return;
       }
 
-      const res = await signIn("credentials", {
-        email: user.email,
-        password: user.password,
-        redirect: false,
-      });
+      const res = await axios.post("/api/register", user);
+      console.log(res.data);
 
-      if (res?.error) {
-        console.log(res);
-        setError("error");
+      if (res.status == 200 || res.status == 201) {
+        console.log("user added successfuly");
+        setError("");
+        router.push("/");
       }
+    } catch (error: any) {
+      console.log(error.response ? error.response.data : error.message);
 
-      setError("");
-      router.push("/dashboard");
-    } catch (error) {
-      console.log(error);
-      setError("");
+      setError("Error registering user");
     } finally {
       setLoading(false);
       setUser({
+        name: "",
         email: "",
         password: "",
       });
     }
   };
-
   return (
     <main>
       <div
@@ -73,7 +73,7 @@ const Login = () => {
         ></div>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
               <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col ">
                 <h1 className="text-2xl font-bold mb-5 text-center">
@@ -89,7 +89,15 @@ const Login = () => {
                   action=""
                 >
                   <input
-                    className="border p-3 w-full rounded-md"
+                    className="border p-3 w-full"
+                    name="name"
+                    value={user.name}
+                    onChange={handleInputChange}
+                    type="text"
+                    placeholder="Your full name"
+                  />
+                  <input
+                    className="border p-3 w-full"
                     onChange={handleInputChange}
                     name="email"
                     value={user.email}
@@ -97,22 +105,21 @@ const Login = () => {
                     placeholder="Your Email address"
                   />
                   <input
-                    className="border p-3 w-full rounded-md"
+                    className="border p-3 w-full"
                     onChange={handleInputChange}
                     name="password"
                     value={user.password}
                     type={"password"}
                     placeholder="Your Password"
                   />
-                  <div className="text-center">
-                    {error && <p className="text-red-500"> {error}</p>}
-                  </div>
-                  <div className="mx-auto">
+                  <div>
+                    {error && <p> {error}</p>}
+
                     <button
                       type="submit"
-                      className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700  px-3 hover:shadow-lg"
+                      className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700"
                     >
-                      {loading ? "Processing..." : "Login"}
+                      {loading ? "Processing..." : "Register"}
                     </button>
                   </div>
                 </form>
@@ -133,7 +140,62 @@ const Login = () => {
         </div>
       </div>
     </main>
+
+    /*  <main className="flex flex-col md:mx-80 sm:mx-10 items-center mt-40">
+      <h1 className="text-3xl font-bold">Welcome to the iFarmStock Admin</h1>
+      <p className="text-lg font-semibold">
+        Only Admin can have access to this page
+      </p>
+
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit} action="">
+        <input
+          className="border p-3 w-full"
+          name="name"
+          value={user.name}
+          onChange={handleInputChange}
+          type="text"
+          placeholder="Your full name"
+        />
+        <input
+          className="border p-3 w-full"
+          onChange={handleInputChange}
+          name="email"
+          value={user.email}
+          type="email"
+          placeholder="Your Email address"
+        />
+        <input
+          className="border p-3 w-full"
+          onChange={handleInputChange}
+          name="password"
+          value={user.password}
+          type={"password"}
+          placeholder="Your Password"
+        />
+        <div>
+          {error && <p> {error}</p>}
+
+          <button
+            type="submit"
+            className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700"
+          >
+            {loading ? "Processing..." : "Register"}
+          </button>
+        </div>
+      </form>
+      <div className="flex justify-center items-center w-full gap-3 py-3">
+        <div className="border border-gray-800 py-2 w-full px-6"></div>
+        <div className="">Or</div>
+        <div className="border border-gray-800 py-2 w-full px-6"></div>
+      </div>
+      <button
+        onClick={() => signIn("google")}
+        className="bg-green-600 w-max p-2 text-white text-lg rounded-md font-semibold mt-2 hover:bg-green-700"
+      >
+        Sign in with Google
+      </button>
+    </main> */
   );
 };
 
-export default Login;
+export default Signup;
