@@ -20,12 +20,15 @@ const ForgotPassword = () => {
         setMessage(res.data.message);
         setError("");
         setEmail("");
+      } else {
+        setError(res.data.error);
+        setMessage("");
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      if (error.response && error.response.data.error) {
-        setError(error.response.data.error);
+      if (error.res && error.res.data.error) {
+        setError(error.res.data.error);
         setMessage("");
         setEmail("");
       } else {
@@ -76,7 +79,7 @@ const ForgotPassword = () => {
                       <p className="text-green-600 font-semibold">{message}</p>
                     )}
                     {error && (
-                      <p className="text-red-600 font-semibold">{error}</p>
+                      <p className="text-red-600 font-semibold">{message}</p>
                     )}
 
                     <button

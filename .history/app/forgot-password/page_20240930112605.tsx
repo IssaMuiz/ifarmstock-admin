@@ -7,7 +7,6 @@ import Link from "next/link";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -17,20 +16,14 @@ const ForgotPassword = () => {
     try {
       const res = await axios.post("/api/forgot-password", { email });
       if (res.status == 200 || res.status == 201) {
-        setMessage(res.data.message);
-        setError("");
+        console.log("link sent successfuly");
+        setMessage("Password link has been sent to your email");
         setEmail("");
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      if (error.response && error.response.data.error) {
-        setError(error.response.data.error);
-        setMessage("");
-        setEmail("");
-      } else {
-        setError("An unexpected error occured");
-      }
+      setMessage(error.res?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -73,10 +66,7 @@ const ForgotPassword = () => {
                       required
                     />
                     {message && (
-                      <p className="text-green-600 font-semibold">{message}</p>
-                    )}
-                    {error && (
-                      <p className="text-red-600 font-semibold">{error}</p>
+                      <p className="text-red-600 font-semibold">{message}</p>
                     )}
 
                     <button
@@ -87,10 +77,7 @@ const ForgotPassword = () => {
                     </button>
                   </form>
 
-                  <Link
-                    href="/"
-                    className="mt-5 text-center font-semibold hover:underline"
-                  >
+                  <Link href="/" className="mt-5 text-center font-semibold">
                     Go back to Login
                   </Link>
                 </div>

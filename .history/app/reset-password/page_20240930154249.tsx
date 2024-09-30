@@ -10,8 +10,7 @@ import Spinner from "@/components/spinner";
 const ResetPassword = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -19,11 +18,8 @@ const ResetPassword = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
-  const toggleShowNewPassword = () => {
-    setShowNewPassword((prev) => !prev);
-  };
-  const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword((prev) => !prev);
+  const toggleShowPassword = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const handleReset = async (e: React.FormEvent) => {
@@ -65,7 +61,7 @@ const ResetPassword = () => {
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
-            <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl">
+            <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
               <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col ">
                 <div className="flex flex-col">
                   <h1 className="text-2xl font-semibold mb-3">
@@ -78,8 +74,8 @@ const ResetPassword = () => {
                   >
                     <div className="relative">
                       <input
-                        className="border  w-full rounded-md p-2"
-                        type={showNewPassword ? "text" : "password"}
+                        className="border p-2"
+                        type={showPassword ? "text" : "password"}
                         placeholder="New password"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
@@ -87,10 +83,10 @@ const ResetPassword = () => {
                       />
                       <button
                         type="button"
-                        onClick={toggleShowNewPassword}
+                        onClick={toggleShowPassword}
                         className="absolute right-2 top-4"
                       >
-                        {showNewPassword ? (
+                        {showPassword ? (
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -130,8 +126,8 @@ const ResetPassword = () => {
                     </div>
                     <div className="relative">
                       <input
-                        className="border w-full rounded-md p-2"
-                        type={showConfirmPassword ? "text" : "password"}
+                        className="border p-2"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Confirm password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
@@ -140,10 +136,10 @@ const ResetPassword = () => {
 
                       <button
                         type="button"
-                        onClick={toggleShowConfirmPassword}
+                        onClick={toggleShowPassword}
                         className="absolute right-2 top-4"
                       >
-                        {showConfirmPassword ? (
+                        {showPassword ? (
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

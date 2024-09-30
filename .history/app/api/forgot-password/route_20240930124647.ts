@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     await transpoter.sendMail(mailOptions);
 
     return NextResponse.json(
-      { message: "Reset link sent successfully. Check your email!" },
+      { message: "Reset link sent successfully" },
       { status: 200 }
     );
   } catch (error: any) {

@@ -24,10 +24,8 @@ const ForgotPassword = () => {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      if (error.response && error.response.data.error) {
-        setError(error.response.data.error);
-        setMessage("");
-        setEmail("");
+      if (error.res && error.res.data.error) {
+        setError(error.res.data.error);
       } else {
         setError("An unexpected error occured");
       }
@@ -76,7 +74,7 @@ const ForgotPassword = () => {
                       <p className="text-green-600 font-semibold">{message}</p>
                     )}
                     {error && (
-                      <p className="text-red-600 font-semibold">{error}</p>
+                      <p className="text-red-600 font-semibold">{message}</p>
                     )}
 
                     <button

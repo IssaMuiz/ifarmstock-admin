@@ -8,7 +8,10 @@ export async function connect() {
     return;
   }
   try {
-    await mongoose.connect(process.env.MONGODB_URI!);
+    await mongoose.connect(process.env.MONGODB_URI!, {
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+    });
     isConnected = true;
     mongoose.connection.on("connected", () => {
       console.log("MongoDB connected");

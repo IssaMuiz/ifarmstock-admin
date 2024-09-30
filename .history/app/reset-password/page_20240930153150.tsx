@@ -1,36 +1,42 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Spinner from "@/components/spinner";
-import Link from "next/link";
 
-const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
+const ResetPassword = () => {
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
+  const handleReset = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const res = await axios.post("/api/forgot-password", { email });
-      if (res.status == 200 || res.status == 201) {
-        setMessage(res.data.message);
-        setError("");
-        setEmail("");
-      }
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
+    }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      if (error.response && error.response.data.error) {
-        setError(error.response.data.error);
-        setMessage("");
-        setEmail("");
-      } else {
-        setError("An unexpected error occured");
+    try {
+      const res = await axios.post("/api/reset-password", {
+        token,
+        newPassword,
+        confirmPassword,
+      });
+      if (res.status === 200) {
+        router.push("/");
       }
+    } catch (error: any) {
+      setError(error.res?.data?.error || "An error occured. Please try again");
     } finally {
       setLoading(false);
     }
@@ -54,45 +60,40 @@ const ForgotPassword = () => {
               <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col ">
                 <div className="flex flex-col">
                   <h1 className="text-2xl font-semibold mb-3">
-                    Forgot password
+                    Reset Password
                   </h1>
-                  <p>
-                    Enter your email and a link will be sent to you to reset
-                    your password
-                  </p>
+                  <p>Enter your new password</p>
                   <form
                     className="flex flex-col gap-3 mt-5"
-                    onSubmit={handleSubmit}
+                    onSubmit={handleReset}
                   >
                     <input
-                      className="border p-2 rounded-md"
-                      type="email"
-                      placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      className="border p-2"
+                      type="password"
+                      placeholder="New password"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
                       required
                     />
-                    {message && (
-                      <p className="text-green-600 font-semibold">{message}</p>
-                    )}
+                    <input
+                      className="border p-2"
+                      type="password"
+                      placeholder="Confirm password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                    />
                     {error && (
                       <p className="text-red-600 font-semibold">{error}</p>
                     )}
 
                     <button
-                      className="border mt-3 rounded-md h-11 bg-green-600 hover:bg-green-700 w-40 text-white text-lg text-semibold"
                       type="submit"
+                      className="border mt-3 rounded-md h-11 bg-green-600 hover:bg-green-700 w-40 text-white text-lg text-semibold"
                     >
                       {loading ? <Spinner /> : "Submit"}
                     </button>
                   </form>
-
-                  <Link
-                    href="/"
-                    className="mt-5 text-center font-semibold hover:underline"
-                  >
-                    Go back to Login
-                  </Link>
                 </div>
               </div>
             </div>
@@ -103,4 +104,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

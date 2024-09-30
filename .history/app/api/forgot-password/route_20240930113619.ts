@@ -16,7 +16,8 @@ export async function POST(req: NextRequest) {
     if (!user) {
       return NextResponse.json(
         {
-          error: "User does not exist. Check the provided email and try again",
+          message:
+            "User does not exist. Check the provided email and try again",
         },
         { status: 404 }
       );
@@ -48,7 +49,7 @@ export async function POST(req: NextRequest) {
     await transpoter.sendMail(mailOptions);
 
     return NextResponse.json(
-      { message: "Reset link sent successfully. Check your email!" },
+      { message: "Reset link sent successfully" },
       { status: 200 }
     );
   } catch (error: any) {
