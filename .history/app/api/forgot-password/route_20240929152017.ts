@@ -42,11 +42,16 @@ export async function POST(req: NextRequest) {
 
     await transpoter.sendMail(mailOptions);
 
-    return NextResponse.json(
-      { message: "Reset link sent successfully" },
+    NextResponse.json(
+      { message: "Password reset link sent to your email" },
       { status: 200 }
     );
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  return NextResponse.json(
+    { message: "Internal server error" },
+    { status: 500 }
+  );
 }

@@ -8,17 +8,11 @@ export async function POST(req: NextRequest) {
   await connect();
 
   try {
-    const { token, newPassword, confirmPassword } = await req.json();
-
-    if (newPassword !== confirmPassword) {
-      return NextResponse.json(
-        { error: "Passwords do not match" },
-        { status: 400 }
-      );
-    }
+    const { token, password } = await req.json();
 
     const user = await User.findOne({
-      resetToken: token,
+      resetPasswordToken: token,
+      resetTokenExpiry: { $gt: Date.now() },
     });
 
     if (!user) {
@@ -28,15 +22,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const currentTime = Date.now();
-    if (user.tokenExpiry < currentTime) {
-      return NextResponse.json({ error: "Token has expired" }, { status: 403 });
-    }
-
-    const hashedPassword = await bcryptjs.hash(newPassword, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
     user.password = hashedPassword;
-    user.resetToken = undefined;
-    user.tokenExpiry = undefined;
+    user.resetPasswordToken = undefined;
+    user.resetTokenExpiry = undefined;
     await user.save();
     return NextResponse.json(
       { message: "Password reset successfully" },

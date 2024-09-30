@@ -35,18 +35,23 @@ export async function POST(req: NextRequest) {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: email,
+      to: user.email,
       subject: "Password Reset",
       text: `You requested a password reset. Click the link to reset your password: ${resetUrl}`,
     };
 
     await transpoter.sendMail(mailOptions);
 
-    return NextResponse.json(
-      { message: "Reset link sent successfully" },
+    NextResponse.json(
+      { message: "Password reset link sent to your email" },
       { status: 200 }
     );
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  return NextResponse.json(
+    { message: "Internal server error" },
+    { status: 500 }
+  );
 }

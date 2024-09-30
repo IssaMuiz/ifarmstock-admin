@@ -173,7 +173,7 @@ const Login = () => {
                   </div>
                   <Link
                     href="/forgot-password"
-                    className="text-red-600 font-semibold hover:underline"
+                    className="text-red-600 font-semibold hover"
                   >
                     Forgot password?
                   </Link>
