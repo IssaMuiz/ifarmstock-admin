@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
 
     await sendVerificationEmail(email, verificationToken);
     return NextResponse.json({
-      message: "Registration Successful! Check your email for verification",
+      message: "User created Succefully",
       success: true,
       savedUser,
     });
