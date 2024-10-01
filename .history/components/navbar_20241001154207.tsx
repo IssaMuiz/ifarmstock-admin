@@ -8,8 +8,8 @@ const Navbar = () => {
   const { data: session } = useSession();
   return (
     <nav className="flex justify-between items-center fixed top-0 left-0 right-0 h-50 px-6 py-4 border-b shadow-md mx-auto">
-      <div className="flex gap-3 items-center">
-        <h1 className="md:text-2xl font-semibold sm:text-xg">iFarmStock</h1>
+      <div>
+        <h1 className="text-3xl font-semibold">iFarmStock</h1>
         <Link href="/" className="left-nav flex gap-3 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="items-center gap-2 hidden md:flex ">
+      <div className="flex items-center gap-2">
         <div className="flex gap-5">
           <Link
             href="/admin-dashboard"

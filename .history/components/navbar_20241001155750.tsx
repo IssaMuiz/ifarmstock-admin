@@ -29,7 +29,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="items-center gap-2 hidden md:flex ">
+      <div className="items-center gap-2 hidden sm:flex md:flex">
         <div className="flex gap-5">
           <Link
             href="/admin-dashboard"

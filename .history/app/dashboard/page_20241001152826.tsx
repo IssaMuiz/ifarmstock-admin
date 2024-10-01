@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Navbar from "@/components/navbar";
 
 const DashBoard = () => {
@@ -72,7 +73,7 @@ const DashBoard = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-5"
+                className="size-6"
               >
                 <path
                   strokeLinecap="round"
@@ -141,7 +142,7 @@ const DashBoard = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-5"
+                className="size-6"
               >
                 <path
                   strokeLinecap="round"
@@ -154,6 +155,7 @@ const DashBoard = () => {
           </p>
         </div>
       </div>
+      <button onClick={() => signOut()}>Logout</button>
     </section>
   );
 };
