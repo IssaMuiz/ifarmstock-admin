@@ -43,7 +43,7 @@ const DashBoard = () => {
         </div>
         <div className="flex flex-col gap-5 bg-white rounded-sm shadow-md p-8">
           <p className="text-gray-500 font-semibold">Average order value</p>
-          <div className="flex justify-between items-center md:flex-col gap-2">
+          <div className="flex justify-between items-center md:flex-col">
             <div className="text-2xl font-semibold">
               <PriceDisplay price={price2} />
             </div>
@@ -73,7 +73,7 @@ const DashBoard = () => {
         </div>
         <div className="flex flex-col gap-5 bg-white rounded-sm shadow-md p-8">
           <p className="text-gray-500 font-semibold">Total orders</p>
-          <div className="flex justify-between items-center md:flex-col gap-2">
+          <div className="flex justify-between items-center md:flex-col">
             <div className="text-2xl font-semibold">{580}</div>
             <div className="flex flex-col items-end md:items-center">
               <p className="text-green-600 flex items-center gap-1 font-semibold">
@@ -98,57 +98,6 @@ const DashBoard = () => {
               <p className="text-xs text-gray-500">Compared to last month</p>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5 shadow-md">
-        <div className="bg-white col-span-1">
-          <h1 className="mx-5 text-xl font-semibold pt-5">Active users</h1>
-          <div className="bg-green-200 text-2xl font-semibold text-center p-5 text-green-600 mx-5 h-20 mt-5 rounded-sm">
-            {148}
-          </div>
-          <div className="flex justify-between items-center p-2 mx-5 font-semibold text-gray-500">
-            <p>Active pages</p>
-            <p>Users</p>
-          </div>
-          <hr />
-          <div className="flex justify-between items-center p-2 mx-5">
-            <p>/products/Chi-live-broiler</p>
-            <p>{15}</p>
-          </div>
-          <hr />
-          <div className="flex justify-between items-center p-2 mx-5">
-            <p>/categories/day-old-chicks</p>
-            <p>{12}</p>
-          </div>
-          <hr />
-          <div className="flex justify-between items-center p-2 mx-5">
-            <p>/categories/frozen-chickens</p>
-            <p>{8}</p>
-          </div>
-          <hr />
-          <div className="flex justify-between items-center p-2 mx-5">
-            <p>/account/orders</p>
-            <p>{6}</p>
-          </div>
-          <hr />
-          <div className="flex justify-between items-center p-2 mx-5">
-            <p>/cart</p>
-            <p>{4}</p>
-          </div>
-          <hr />
-          <div className="flex justify-between items-center p-2 mx-5">
-            <p>/checkout</p>
-            <p>{4}</p>
-          </div>
-          <hr />
-          <div className="flex justify-between items-center p-2 mx-5">
-            <p>/pages/about-us</p>
-            <p>{1}</p>
-          </div>
-        </div>
-
-        <div className="bg-white shadow-md col-span-2">
-          <p className="text-xl font-semibold mx-5 p-2 ">Income statistics</p>
         </div>
       </div>
     </section>

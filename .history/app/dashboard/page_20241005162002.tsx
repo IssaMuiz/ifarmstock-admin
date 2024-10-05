@@ -100,10 +100,10 @@ const DashBoard = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5 shadow-md">
-        <div className="bg-white col-span-1">
-          <h1 className="mx-5 text-xl font-semibold pt-5">Active users</h1>
-          <div className="bg-green-200 text-2xl font-semibold text-center p-5 text-green-600 mx-5 h-20 mt-5 rounded-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-5 shadow-md">
+        <div className="bg-white">
+          <h1 className="mx-5 text-xl font-semibold">Active users</h1>
+          <div className="bg-green-200 text-2xl font-semibold text-center p-3 text-green-600 mx-5 h-20 mt-5 rounded-sm">
             {148}
           </div>
           <div className="flex justify-between items-center p-2 mx-5 font-semibold text-gray-500">
@@ -145,10 +145,6 @@ const DashBoard = () => {
             <p>/pages/about-us</p>
             <p>{1}</p>
           </div>
-        </div>
-
-        <div className="bg-white shadow-md col-span-2">
-          <p className="text-xl font-semibold mx-5 p-2 ">Income statistics</p>
         </div>
       </div>
     </section>
