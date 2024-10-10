@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -11,32 +11,15 @@ interface ToggleSidebar {
 const Navbar = ({ toggleSidebar, showSidebar }: ToggleSidebar) => {
   const [showProfile, setShowProfile] = useState(false);
   const { data: session } = useSession();
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleShowProfile = () => {
     setShowProfile((prev) => !prev);
   };
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(e.target as Node)
-    ) {
-      setShowProfile(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
   return (
     <nav
       className={`bg-white h-16 fixed top-0 left-0 ${
-        showSidebar ? "xl:left-64" : "w-full"
+        showSidebar ? "md:left-72" : "w-full"
       } right-0 shadow-md z-10 transition-all ease-in-out duration-300`}
     >
       <div className="mx-auto flex justify-between p-2">
@@ -62,7 +45,7 @@ const Navbar = ({ toggleSidebar, showSidebar }: ToggleSidebar) => {
             className="p-1 bg-gray-200 rounded-md max-w-80 flex-1 border outline-none"
           />
         </div>
-        <div className="right-nav flex items-center gap-1 ml-2">
+        <div className="right-nav flex items-center gap-1 md:gap-3 ml-2">
           <div className="relative cursor-pointer hover:bg-gray-300 rounded-sm p-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +64,7 @@ const Navbar = ({ toggleSidebar, showSidebar }: ToggleSidebar) => {
           </div>
           <div className="relative ">
             <div
-              className="cursor-pointer hover:bg-gray-100 flex items-center"
+              className="cursor-pointer hover:bg-gray-100 flex items-center gap-1"
               onClick={toggleShowProfile}
             >
               <Image
@@ -97,18 +80,15 @@ const Navbar = ({ toggleSidebar, showSidebar }: ToggleSidebar) => {
               </div>
             </div>
             {showProfile && (
-              <div
-                ref={dropdownRef}
-                className="bg-white shadow top-14 -right-2 absolute w-60 md:w-[18rem] text-xl font-semibold rounded-sm "
-              >
+              <div className="bg-white shadow top-14 -right-2 absolute w-60 md:w-[18rem] text-xl font-semibold rounded-sm ">
                 <div className="flex flex-col gap-3">
-                  <p className="hover:bg-gray-300 cursor-pointer px-4 py-2 mt-5 transition-all ease-in-out duration-300 text-xs">
+                  <p className="hover:bg-gray-300 cursor-pointer px-4 py-2 mt-5 transition-all ease-in-out duration-300">
                     Profile
                   </p>
                   <hr />
                   <p
                     onClick={() => signOut()}
-                    className="hover:bg-gray-300 cursor-pointer px-4 py-2 mb-2 transition-all ease-in-out duration-300 border-gray-300 text-xs"
+                    className="hover:bg-gray-300 cursor-pointer px-4 py-2 mb-2 transition-all ease-in-out duration-300 border-gray-300"
                   >
                     Sign Out
                   </p>

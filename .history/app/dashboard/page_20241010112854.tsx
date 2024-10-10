@@ -117,8 +117,8 @@ const DashBoard = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-4 mt-5">
-        <div className="bg-white shadow-md mb-4 lg:mb-0 col-span-1">
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-4 mt-5 shadow-md">
+        <div className="bg-white mb-4 lg:mb-0 col-span-1">
           <h1 className="mx-5 text-xl font-semibold pt-5">Active users</h1>
           <div className="bg-green-200 text-2xl font-semibold text-center p-5 text-green-600 mx-5 h-20 mt-5 rounded-sm">
             {148}

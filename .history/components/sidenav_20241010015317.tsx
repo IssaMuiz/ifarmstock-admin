@@ -7,7 +7,7 @@ const Sidenav = ({ showSidebar }: Sidebar) => {
   return (
     <aside className="h-20 overflow-y-auto">
       <div
-        className={`fixed w-64 overflow-x-hidden scrollbar  overflow-auto z-20 left-0 top-0 bottom-0 transform transition-transform duration-300  bg-gray-600 ${
+        className={`fixed w-80 overflow-x-hidden scrollbar  overflow-auto z-20 left-0 top-0 bottom-0 transform transition-transform duration-300  bg-gray-600 ${
           showSidebar ? "translate-x-0" : "-translate-x-full"
         }`}
       >

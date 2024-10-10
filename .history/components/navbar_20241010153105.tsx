@@ -97,10 +97,7 @@ const Navbar = ({ toggleSidebar, showSidebar }: ToggleSidebar) => {
               </div>
             </div>
             {showProfile && (
-              <div
-                ref={dropdownRef}
-                className="bg-white shadow top-14 -right-2 absolute w-60 md:w-[18rem] text-xl font-semibold rounded-sm "
-              >
+              <div className="bg-white shadow top-14 -right-2 absolute w-60 md:w-[18rem] text-xl font-semibold rounded-sm ">
                 <div className="flex flex-col gap-3">
                   <p className="hover:bg-gray-300 cursor-pointer px-4 py-2 mt-5 transition-all ease-in-out duration-300 text-xs">
                     Profile

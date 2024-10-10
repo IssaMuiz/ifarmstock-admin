@@ -19,7 +19,9 @@ const DashBoard = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-4">
         <div className="flex flex-col gap-5  bg-white rounded-sm shadow-md">
-          <p className="text-gray-500 font-semibold pt-4 pl-3">Total sells</p>
+          <p className="text-gray-500 font-semibold pt-4 pl-3 text-[20px]">
+            Total sells
+          </p>
           <div className="flex justify-between items-center md:flex-col gap-2 p-7">
             <div className="text-2xl font-semibold">
               <PriceDisplay price={price} />
@@ -51,7 +53,7 @@ const DashBoard = () => {
           </div>
         </div>
         <div className="flex flex-col gap-5 bg-white rounded-sm shadow-md">
-          <p className="text-gray-500 font-semibold whitespace-nowrap pt-4 pl-3">
+          <p className="text-gray-500 font-semibold whitespace-nowrap pt-4 pl-3 text-[20px]">
             Average order value
           </p>
           <div className="flex justify-between items-center md:flex-col gap-2 p-7">
@@ -85,7 +87,7 @@ const DashBoard = () => {
           </div>
         </div>
         <div className="flex flex-col gap-5 bg-white rounded-sm shadow-md">
-          <p className="text-gray-500 font-semibold whitespace-nowrap pt-4 pl-3">
+          <p className="text-gray-500 font-semibold whitespace-nowrap pt-4 pl-3 text-[20px]">
             Total orders
           </p>
           <div className="flex justify-between items-center md:flex-col gap-2 p-7">

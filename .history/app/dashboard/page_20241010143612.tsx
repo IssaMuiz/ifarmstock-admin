@@ -51,7 +51,7 @@ const DashBoard = () => {
           </div>
         </div>
         <div className="flex flex-col gap-5 bg-white rounded-sm shadow-md">
-          <p className="text-gray-500 font-semibold whitespace-nowrap pt-4 pl-3">
+          <p className="text-gray-500 font-semibold whitespace-nowrap pt-4 pl-3 lg:text-xs xl:text-sm">
             Average order value
           </p>
           <div className="flex justify-between items-center md:flex-col gap-2 p-7">

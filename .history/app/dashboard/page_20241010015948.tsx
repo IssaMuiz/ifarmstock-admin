@@ -18,9 +18,9 @@ const DashBoard = () => {
         <p className="text-2xl font-semibold">Dashboard</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-4">
-        <div className="flex flex-col gap-5  bg-white rounded-sm shadow-md">
-          <p className="text-gray-500 font-semibold pt-4 pl-3">Total sells</p>
-          <div className="flex justify-between items-center md:flex-col gap-2 p-7">
+        <div className="flex flex-col gap-5  bg-white rounded-sm shadow-md p-8">
+          <p className="text-gray-500 font-semibold">Total sells</p>
+          <div className="flex justify-between items-center md:flex-col gap-2">
             <div className="text-2xl font-semibold">
               <PriceDisplay price={price} />
             </div>
@@ -50,11 +50,9 @@ const DashBoard = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-5 bg-white rounded-sm shadow-md">
-          <p className="text-gray-500 font-semibold whitespace-nowrap pt-4 pl-3">
-            Average order value
-          </p>
-          <div className="flex justify-between items-center md:flex-col gap-2 p-7">
+        <div className="flex flex-col gap-5 bg-white rounded-sm shadow-md p-8">
+          <p className="text-gray-500 font-semibold">Average order value</p>
+          <div className="flex justify-between items-center md:flex-col gap-2">
             <div className="text-2xl font-semibold">
               <PriceDisplay price={price2} />
             </div>
@@ -78,17 +76,13 @@ const DashBoard = () => {
                 </span>
                 <span>54.7%</span>
               </p>
-              <p className="text-gray-500 text-xs whitespace-nowrap">
-                Compared to last month
-              </p>
+              <p className="text-gray-500 text-xs">Compared to last month</p>
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-5 bg-white rounded-sm shadow-md">
-          <p className="text-gray-500 font-semibold whitespace-nowrap pt-4 pl-3">
-            Total orders
-          </p>
-          <div className="flex justify-between items-center md:flex-col gap-2 p-7">
+        <div className="flex flex-col gap-5 bg-white rounded-sm shadow-md p-8">
+          <p className="text-gray-500 font-semibold">Total orders</p>
+          <div className="flex justify-between items-center md:flex-col gap-2">
             <div className="text-2xl font-semibold">{580}</div>
             <div className="flex flex-col items-end md:items-center">
               <p className="text-green-600 flex items-center gap-1 font-semibold">
@@ -110,15 +104,13 @@ const DashBoard = () => {
                 </span>
                 <span>24.7%</span>
               </p>
-              <p className="text-gray-500 text-xs whitespace-nowrap">
-                Compared to last month
-              </p>
+              <p className="text-gray-500 text-xs">Compared to last month</p>
             </div>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-4 mt-5">
-        <div className="bg-white shadow-md mb-4 lg:mb-0 col-span-1">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5 shadow-md">
+        <div className="bg-white col-span-1">
           <h1 className="mx-5 text-xl font-semibold pt-5">Active users</h1>
           <div className="bg-green-200 text-2xl font-semibold text-center p-5 text-green-600 mx-5 h-20 mt-5 rounded-sm">
             {148}

@@ -7,7 +7,7 @@ const Sidenav = ({ showSidebar }: Sidebar) => {
   return (
     <aside className="h-20 overflow-y-auto">
       <div
-        className={`fixed w-64 overflow-x-hidden scrollbar  overflow-auto z-20 left-0 top-0 bottom-0 transform transition-transform duration-300  bg-gray-600 ${
+        className={`fixed w-80 overflow-x-hidden scrollbar  overflow-auto z-20 left-0 top-0 bottom-0 transform transition-transform duration-300  bg-gray-600 ${
           showSidebar ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -15,7 +15,7 @@ const Sidenav = ({ showSidebar }: Sidebar) => {
           <p className="text-2xl">iFarmStock</p>
           <p className="bg-white p-1 rounded-sm font-semibold text-sm">ADMIN</p>
         </div>
-        <div className="flex flex-col items-start gap-6 text-white text-base font-semibold mt-10">
+        <div className="flex flex-col items-start gap-6 text-white text-lg font-semibold mt-10">
           <div className="flex gap-5 w-full items-center py-3 px-6 hover:bg-gray-500 cursor-pointer">
             <svg
               width="25px"
@@ -46,7 +46,7 @@ const Sidenav = ({ showSidebar }: Sidebar) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
+              className="size-7"
             >
               <path
                 strokeLinecap="round"
@@ -64,7 +64,7 @@ const Sidenav = ({ showSidebar }: Sidebar) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
+              className="size-7"
             >
               <path
                 strokeLinecap="round"
@@ -82,7 +82,7 @@ const Sidenav = ({ showSidebar }: Sidebar) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
+              className="size-7"
             >
               <path
                 strokeLinecap="round"
@@ -100,7 +100,7 @@ const Sidenav = ({ showSidebar }: Sidebar) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
+              className="size-7"
             >
               <path
                 strokeLinecap="round"
@@ -118,7 +118,7 @@ const Sidenav = ({ showSidebar }: Sidebar) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
+              className="size-7"
             >
               <path
                 strokeLinecap="round"

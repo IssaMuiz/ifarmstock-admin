@@ -30,7 +30,7 @@ export default function ClientSessionProvider({
         <Sidenav showSidebar={showSidebar} />
 
         <div
-          className={`fixed block xl:hidden inset-0 bg-black transition-opacity duration-300 ease-in-out z-10 ${
+          className={`fixed block md:hidden inset-0 bg-black transition-opacity duration-300 ease-in-out z-10 ${
             showSidebar
               ? "opacity-40 pointer-events-auto"
               : "opacity-0 pointer-events-none"
@@ -39,7 +39,7 @@ export default function ClientSessionProvider({
         ></div>
         <section
           className={`relative z-0 transition-all duration-300 ease-in-out ${
-            showSidebar ? "xl:ml-64" : "w-full"
+            showSidebar ? "md:ml-80" : "w-full"
           }  flex-1`}
         >
           {!noNavRoutes.includes(pathname) && (
