@@ -27,7 +27,6 @@ const Products = () => {
 
   useEffect(() => {
     const fetchProducts = async (page: number) => {
-      setLoading(true);
       try {
         await axios
           .get<{
@@ -36,7 +35,7 @@ const Products = () => {
           }>(`/api/products?page=${page}&limit=${productPerPage}`)
           .then((response) => {
             setProducts(response.data.products);
-            console.log(response.data.products);
+
             setTotalPages(response.data.totalPages);
           });
       } catch (error: any) {

@@ -23,20 +23,17 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  const productPerPage = 10;
-
   useEffect(() => {
     const fetchProducts = async (page: number) => {
-      setLoading(true);
       try {
         await axios
           .get<{
             totalPages: SetStateAction<number>;
             products: Product[];
-          }>(`/api/products?page=${page}&limit=${productPerPage}`)
+          }>(`/api/products?page=${page}&limit=10`)
           .then((response) => {
             setProducts(response.data.products);
-            console.log(response.data.products);
+
             setTotalPages(response.data.totalPages);
           });
       } catch (error: any) {
@@ -129,22 +126,18 @@ const Products = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product, index) => {
-                  const startIndex = (currentPage - 1) * productPerPage;
-                  const displayIndex = startIndex + index + 1;
-                  return (
-                    <tr key={product._id} className="border-b border-gray-300">
-                      <td className="px-3 py-2">{displayIndex}</td>
+                {products.map((product, index) => (
+                  <tr key={product._id} className="border-b border-gray-300">
+                    <td className="px-3 py-2">{index + 1}</td>
 
-                      <td className="px-3 py-2">{product.title}</td>
-                      <td className="px-3 py-2">{product.description}</td>
-                      <td className="px-3 py-2">{product.category}</td>
-                      <td className="px-3 py-2">
-                        <PriceDisplay price={product.price} />
-                      </td>
-                    </tr>
-                  );
-                })}
+                    <td className="px-3 py-2">{product.title}</td>
+                    <td className="px-3 py-2">{product.description}</td>
+                    <td className="px-3 py-2">{product.category}</td>
+                    <td className="px-3 py-2">
+                      <PriceDisplay price={product.price} />
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
             <div className="flex justify-center gap-1 mx-auto mt-5 pb-5">

@@ -50,7 +50,8 @@ export default function ClientSessionProvider({
             <Navbar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
           )}
           <ToastContainer
-            position="top-right"
+            position="top-center"
+            className="w-full"
             toastClassName={() =>
               "bg-green-500 text-white text-center rounded-sm "
             }

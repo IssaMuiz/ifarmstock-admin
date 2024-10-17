@@ -97,9 +97,9 @@ const NewProduct = () => {
         hideProgressBar: false,
         style: {
           width: "300px",
-          fontSize: "35px",
-          marginTop: "50px",
-          padding: "15px",
+          fontSize: "30px",
+          marginTop: "40px",
+          padding: "10px",
         },
       });
       setProduct({

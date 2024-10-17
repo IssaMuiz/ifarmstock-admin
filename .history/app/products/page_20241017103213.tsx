@@ -26,17 +26,16 @@ const Products = () => {
   const productPerPage = 10;
 
   useEffect(() => {
-    const fetchProducts = async (page: number) => {
-      setLoading(true);
+    const fetchProducts = async () => {
       try {
         await axios
           .get<{
             totalPages: SetStateAction<number>;
             products: Product[];
-          }>(`/api/products?page=${page}&limit=${productPerPage}`)
+          }>(`/api/products?page=${currentPage}&limit=${productPerPage}`)
           .then((response) => {
             setProducts(response.data.products);
-            console.log(response.data.products);
+            console.log(response.data.totalPages);
             setTotalPages(response.data.totalPages);
           });
       } catch (error: any) {
@@ -47,7 +46,7 @@ const Products = () => {
       }
     };
 
-    fetchProducts(currentPage);
+    fetchProducts();
   }, [currentPage]);
 
   const handleNextPage = () => {

@@ -92,15 +92,6 @@ const NewProduct = () => {
 
       toast.success("Product added successfully", {
         autoClose: 6000,
-        position: "top-right",
-        closeButton: false,
-        hideProgressBar: false,
-        style: {
-          width: "300px",
-          fontSize: "35px",
-          marginTop: "50px",
-          padding: "15px",
-        },
       });
       setProduct({
         title: "",

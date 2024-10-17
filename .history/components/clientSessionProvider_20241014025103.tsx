@@ -6,9 +6,6 @@ import Navbar from "./navbar";
 import Sidenav from "./sidenav";
 import { usePathname } from "next/navigation";
 import Footer from "./footer";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 export default function ClientSessionProvider({
   children,
 }: {
@@ -49,13 +46,7 @@ export default function ClientSessionProvider({
           {!noNavRoutes.includes(pathname) && (
             <Navbar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
           )}
-          <ToastContainer
-            position="top-right"
-            toastClassName={() =>
-              "bg-green-500 text-white text-center rounded-sm "
-            }
-            bodyClassName="text-sm font-medium"
-          />
+
           {children}
         </main>
         <footer

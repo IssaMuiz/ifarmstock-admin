@@ -94,12 +94,9 @@ const NewProduct = () => {
         autoClose: 6000,
         position: "top-right",
         closeButton: false,
-        hideProgressBar: false,
         style: {
-          width: "300px",
-          fontSize: "35px",
-          marginTop: "50px",
-          padding: "15px",
+          width: "200px",
+          fontSize: "18px",
         },
       });
       setProduct({

@@ -83,24 +83,13 @@ const NewProduct = () => {
         })
       );
 
-      const newProduct = {
-        ...product,
-        images: [...product.images, ...uploadedImages],
-      };
+      const newProduct = { ...product, images: uploadedImages };
 
       await axios.post("/api/products", newProduct);
 
       toast.success("Product added successfully", {
-        autoClose: 6000,
-        position: "top-right",
-        closeButton: false,
-        hideProgressBar: false,
-        style: {
-          width: "300px",
-          fontSize: "35px",
-          marginTop: "50px",
-          padding: "15px",
-        },
+        position: "top-center",
+        autoClose: 3000,
       });
       setProduct({
         title: "",
@@ -113,7 +102,7 @@ const NewProduct = () => {
       router.push("/products");
     } catch (error: any) {
       console.error("Error adding product:", error);
-      toast.error("Error adding product. Please try again.");
+      alert("An unexpected error occured");
     } finally {
       setLoading(false);
     }
@@ -200,16 +189,15 @@ const NewProduct = () => {
               type="file"
               className="sr-only"
               accept="image/*"
-              multiple
               required
             />
           </label>
-          <div className="mt-5 flex flex-row gap-1">
+          <div className="mt-5">
             {preview.map((image, index) => (
               <Image
                 key={index}
                 src={image}
-                alt={`Preview ${index + 1}`}
+                alt={`Preview ${index}`}
                 height={150}
                 width={150}
               />

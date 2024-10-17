@@ -5,8 +5,6 @@ import React, { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Spinner from "@/components/spinner";
-import { toast } from "react-toastify";
 
 interface Product {
   title: string;
@@ -24,9 +22,8 @@ const NewProduct = () => {
     price: 0,
     category: "",
   });
-  const categories = ["Electronics", "Clothing", "Shoes", "Phones"];
+  const categories = ["Electronics", "Clothing", "Shoes"];
   const [preview, setPreview] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -57,7 +54,7 @@ const NewProduct = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+
     const formData = new FormData();
 
     formData.append("title", product.title);
@@ -83,25 +80,11 @@ const NewProduct = () => {
         })
       );
 
-      const newProduct = {
-        ...product,
-        images: [...product.images, ...uploadedImages],
-      };
+      const newProduct = { ...product, images: uploadedImages };
 
       await axios.post("/api/products", newProduct);
 
-      toast.success("Product added successfully", {
-        autoClose: 6000,
-        position: "top-right",
-        closeButton: false,
-        hideProgressBar: false,
-        style: {
-          width: "300px",
-          fontSize: "35px",
-          marginTop: "50px",
-          padding: "15px",
-        },
-      });
+      alert("Product added successfully");
       setProduct({
         title: "",
         images: [],
@@ -113,13 +96,11 @@ const NewProduct = () => {
       router.push("/products");
     } catch (error: any) {
       console.error("Error adding product:", error);
-      toast.error("Error adding product. Please try again.");
-    } finally {
-      setLoading(false);
+      alert("An unexpected error occured");
     }
   };
   return (
-    <section className="mt-14 min-h-screen  mx-2 md:mx-24">
+    <section className="mt-20 min-h-screen  mx-2 md:mx-24">
       <div>
         <h1 className="text-2xl font-semibold mb-8">Add New Product</h1>
       </div>
@@ -200,18 +181,17 @@ const NewProduct = () => {
               type="file"
               className="sr-only"
               accept="image/*"
-              multiple
               required
             />
           </label>
-          <div className="mt-5 flex flex-row gap-1">
+          <div>
             {preview.map((image, index) => (
               <Image
                 key={index}
                 src={image}
-                alt={`Preview ${index + 1}`}
-                height={150}
-                width={150}
+                alt={`Preview ${index}`}
+                height={100}
+                width={100}
               />
             ))}
           </div>
@@ -245,7 +225,7 @@ const NewProduct = () => {
             type="submit"
             className="p-2 w-full hover:bg-green-600 bg-green-500 text-white font-semibold rounded-sm"
           >
-            {loading ? <Spinner /> : "Save product"}
+            Save product
           </button>
         </div>
       </form>

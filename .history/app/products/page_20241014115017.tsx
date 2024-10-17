@@ -23,20 +23,17 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  const productPerPage = 10;
-
   useEffect(() => {
     const fetchProducts = async (page: number) => {
-      setLoading(true);
       try {
         await axios
           .get<{
             totalPages: SetStateAction<number>;
             products: Product[];
-          }>(`/api/products?page=${page}&limit=${productPerPage}`)
+          }>(`/api/products?page=${page}&limit=10`)
           .then((response) => {
             setProducts(response.data.products);
-            console.log(response.data.products);
+
             setTotalPages(response.data.totalPages);
           });
       } catch (error: any) {
@@ -129,29 +126,25 @@ const Products = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product, index) => {
-                  const startIndex = (currentPage - 1) * productPerPage;
-                  const displayIndex = startIndex + index + 1;
-                  return (
-                    <tr key={product._id} className="border-b border-gray-300">
-                      <td className="px-3 py-2">{displayIndex}</td>
+                {products.map((product, index) => (
+                  <tr key={product._id} className="border-b border-gray-300">
+                    <td className="px-3 py-2">{index}</td>
 
-                      <td className="px-3 py-2">{product.title}</td>
-                      <td className="px-3 py-2">{product.description}</td>
-                      <td className="px-3 py-2">{product.category}</td>
-                      <td className="px-3 py-2">
-                        <PriceDisplay price={product.price} />
-                      </td>
-                    </tr>
-                  );
-                })}
+                    <td className="px-3 py-2">{product.title}</td>
+                    <td className="px-3 py-2">{product.description}</td>
+                    <td className="px-3 py-2">{product.category}</td>
+                    <td className="px-3 py-2">
+                      <PriceDisplay price={product.price} />
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
-            <div className="flex justify-center gap-1 mx-auto mt-5 pb-5">
+            <div className="flex justify-center gap-1 mx-auto mt-5">
               <button
                 disabled={currentPage === 1}
                 onClick={handlePrevPage}
-                className={`border p-1  ${
+                className={`border p-2  ${
                   currentPage === 1
                     ? " border-gray-300 text-gray-300 "
                     : "hover:border-green-600 "
@@ -162,12 +155,12 @@ const Products = () => {
               {pageNumbers.map((page) => (
                 <button
                   key={page}
-                  onClick={() => handlePageClick(page)}
+                  onClick={() => handlePageClick(1)}
                   className={`${
                     page === currentPage
                       ? "active bg-green-600 text cursor-pointer"
                       : ""
-                  } border border-gray-300 px-2 py-1 hover:border-green-600`}
+                  } border border-gray-300 p-2 hover:border-green-600`}
                 >
                   {page}
                 </button>
@@ -176,7 +169,7 @@ const Products = () => {
               <button
                 disabled={currentPage === totalPages}
                 onClick={handleNextPage}
-                className={`border p-1 ${
+                className={`border p-2 ${
                   currentPage === totalPages
                     ? " border-gray-300 text-gray-300 "
                     : "hover:border-green-600 cursor-pointer"

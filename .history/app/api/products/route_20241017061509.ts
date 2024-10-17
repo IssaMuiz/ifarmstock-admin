@@ -33,22 +33,21 @@ export async function GET(req: NextRequest) {
   await connect();
 
   try {
-    const { searchParams } = new URL(req.url);
+    const { searchParams } = new URL(req.url?.split("?")[1]);
     const page = parseInt(searchParams.get("page") || "1", 10);
     const limit = parseInt(searchParams.get("limit") || "10", 10);
 
     const skip = (page - 1) * limit;
 
-    const products = await Products.find().skip(skip).limit(limit);
-    const totalProducts = await Products.countDocuments();
+    const [products, total] = await Promise.all([
+      Products.find().skip(skip).limit(limit),
+      Products.countDocuments(),
+    ]);
 
-    return new Response(
-      JSON.stringify({
-        products,
-        totalPages: Math.ceil(totalProducts / limit),
-      }),
-      { status: 200 }
-    );
+    console.log(products);
+    const totalPages = Math.ceil(total / limit);
+
+    return NextResponse.json({ products, totalPages }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ message: "Error fetching products" }, error);
   }
