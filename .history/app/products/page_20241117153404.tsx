@@ -140,7 +140,7 @@ const Products = () => {
       <div className="flex justify-between items-center mb-5">
         <h1 className="text-3xl font-semibold">Products</h1>
         <Link
-          href="/products/add"
+          href="/product"
           type="button"
           className="p-2 font-semibold text-base bg-green-500 hover:bg-green-600 rounded-md text-white"
         >

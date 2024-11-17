@@ -25,7 +25,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
         { status: 400 }
       );
     }
-    const { id } = await params;
+    const { id } = params;
 
     const {
       newTitle: title,
@@ -54,6 +54,7 @@ export async function GET(req: Request, { params }: Params) {
   try {
     await connectDB();
 
+    console.log("GET request received with params:", params);
     if (!params || !params.id) {
       return NextResponse.json(
         { message: "Invalid product ID" },
@@ -61,7 +62,7 @@ export async function GET(req: Request, { params }: Params) {
       );
     }
 
-    const { id } = await params;
+    const { id } = params;
 
     const product = await Products.findOne({ _id: id });
 

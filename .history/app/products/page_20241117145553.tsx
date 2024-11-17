@@ -105,12 +105,13 @@ const Products = () => {
       try {
         if (!id) throw new Error("Invalid product ID");
         console.log("Deleting product with ID:", id);
-        const res = await axios.delete(`/api/products?id=${id}`);
+        const res = await axios.delete(`/api/products`);
 
         if (res.status === 200) {
-          setProducts((prev) => prev.filter((product) => product._id !== id));
-          router.push("/products");
-          fetchProducts(currentPage);
+          router.refresh();
+          /*  setProducts((prev) => prev.filter((product) => product._id !== id));
+          router.push("/products"); */
+          /* fetchProducts(currentPage); */
         } else {
           throw new Error("Failed to delete product");
         }
@@ -140,7 +141,7 @@ const Products = () => {
       <div className="flex justify-between items-center mb-5">
         <h1 className="text-3xl font-semibold">Products</h1>
         <Link
-          href="/products/add"
+          href="/product"
           type="button"
           className="p-2 font-semibold text-base bg-green-500 hover:bg-green-600 rounded-md text-white"
         >

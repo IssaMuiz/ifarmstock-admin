@@ -82,21 +82,12 @@ const EditProductForm: React.FC<ProductForm> = ({
       );
 
       const newProduct = {
-        newTitle,
-        newPrice,
-        newCategory,
-        newDescription,
-        images: [...preview, ...uploadedImages],
+        images: [...images, ...uploadedImages],
       };
 
-      const res = await fetch(`http://localhost:3000/api/products/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(newProduct),
-      });
-      if (res.status === 200) {
+      const response = await axios.put(`/api/products/${id}`, newProduct);
+
+      if (response.status === 200) {
         router.push("/products");
         toast.success("Product update successfully", {
           autoClose: 6000,
@@ -145,6 +136,7 @@ const EditProductForm: React.FC<ProductForm> = ({
           value={newCategory}
           onChange={(e) => setNewCategory(e.target.value)}
           className="w-full border border-gray-300 rounded-sm p-2"
+          
         >
           <option value="">Select a category</option>
           {categories.map((cat, index) => (
@@ -197,6 +189,7 @@ const EditProductForm: React.FC<ProductForm> = ({
             className="sr-only"
             accept="image/*"
             multiple
+          
           />
         </label>
         <div className="mt-5 flex flex-row gap-1">
@@ -220,6 +213,7 @@ const EditProductForm: React.FC<ProductForm> = ({
           value={newDescription}
           onChange={(e) => setNewDescription(e.target.value)}
           rows={4}
+          
         />
       </div>
       <div className="px-5 md:px-32 mb-3 pt-5">
@@ -231,6 +225,7 @@ const EditProductForm: React.FC<ProductForm> = ({
           name="price"
           value={newPrice}
           onChange={(e) => setNewPrice(Number(e.target.value))}
+          
         />
       </div>
       <div className="px-5 md:px-32 mb-3 pt-5">
