@@ -4,7 +4,7 @@ import { connectDB } from "@/lib/config/mongodb";
 import Products from "@/lib/models/product";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+/* export async function POST(req: NextRequest) {
   await connectDB();
   try {
     const { title, description, price, images, category } = await req.json();
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message });
   }
-}
+} */
 
 export async function GET(req: NextRequest) {
   await connectDB();
@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function DELETE(req: NextRequest) {
+/* export async function DELETE(req: NextRequest) {
   try {
     await connectDB();
     const id = req.nextUrl.searchParams.get("id");
@@ -79,3 +79,4 @@ export async function DELETE(req: NextRequest) {
     );
   }
 }
+ */
